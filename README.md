@@ -24,7 +24,7 @@ This tool takes the IEP and the lesson, understands both, and produces a concret
 ### Setup
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mdkaiumhasan/waypoint-iep-mcp.git
 cd waypoint-iep-mcp
 npm install
 npm run build
@@ -177,9 +177,11 @@ Applied naively, you get a student with 90 minutes on a 20-question test. That i
 
 This distinction matters because Claude can read resources as part of its context window before deciding which tools to call. Exposing the disability knowledge base as a resource means Claude can reference it when a teacher asks a follow-up question without needing to call a tool.
 
-### Why Claude Opus for parsing, Sonnet for generation?
+### Why use the Anthropic API only for modification generation, not parsing?
 
-Parsing an IEP requires careful extraction from messy, format-inconsistent source documents. Opus handles this more reliably for complex documents. The modification generation calls also use Opus because the output quality is the primary evaluation criterion — this is not a place to save tokens.
+IEP parsing uses pattern matching and heuristics — no API call needed. The raw IEP text is chunked into named sections (goals, accommodations, modifications, present levels) and exposed as MCP resources. Claude Desktop reads those structured chunks directly and reasons over them.
+
+The modification generation step is where the API call happens, using `claude-sonnet-4-6`. This is the quality-critical step — the output needs to be specific, grounded, and immediately usable by a teacher. That is not a place to cut corners.
 
 ---
 
