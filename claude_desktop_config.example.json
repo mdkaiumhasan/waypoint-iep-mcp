@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "waypoint-iep": {
+      "command": "node",
+      "args": ["/absolute/path/to/waypoint-iep-mcp/dist/index.js"],
+      "env": {
+        "ANTHROPIC_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
